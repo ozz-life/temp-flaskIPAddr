@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ interface.name }}{% endblock %}
+
+{% block content %}
+ <h1>{{ interface.name }}</h1>
+ {% if interface.state %}
+  <p><strong>State:</strong> {{ interface.state }}</p>
+ {% endif %}
+ <p><strong>IP address:</strong> {{ interface.ipaddress }}</p>
+ <p><strong>Netmask:</strong> {{ interface.netmask }}</p>
+ 
+ {% if can_modify %}
+ <form method="post">
+  {{ form.hidden_tag() }}
+  <p>
+   {{ form.action.label }}<br>
+   {{ form.action() }}
+  </p>
+  {% if form.ipaddress %}
+  <p>
+   {{ form.ipaddress.label }}<br>
+   {{ form.ipaddress() }}
+  </p>
+  {% endif %}
+  {% if form.netmask %}
+  <p>
+   {{ form.netmask.label }}<br>
+   {{ form.netmask() }}
+  </p>
+  {% endif %}
+  <input type="submit" value="Save">
+ </form>
+ {% endif %}
+{% endblock %}
